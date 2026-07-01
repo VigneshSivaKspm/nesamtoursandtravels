@@ -1,8 +1,8 @@
+import { Link } from 'react-router-dom'
+import { Users } from 'lucide-react'
 import { VEHICLES } from '../../data/content'
-import { AnimatedSection } from '../ui/AnimatedSection'
 import { SectionHeading } from '../ui/SectionHeading'
 import { formatCurrency } from '../../lib/utils'
-import { Users, Luggage } from 'lucide-react'
 
 const fleetImages: Record<string, string> = {
   hatchback:
@@ -14,60 +14,41 @@ const fleetImages: Record<string, string> = {
 
 export function FleetShowcase() {
   return (
-    <section className="bg-navy-950 section-padding">
+    <section className="section-padding bg-white">
       <div className="section-container">
-        <AnimatedSection>
-          <SectionHeading
-            eyebrow="Our Fleet"
-            title="Choose Your Perfect Ride"
-            description="From compact hatchbacks to spacious SUVs — every vehicle is maintained, insured, and driven by verified professionals."
-            light
-          />
-        </AnimatedSection>
+        <SectionHeading
+          eyebrow="Fleet"
+          title="Choose Your Ride"
+          description="All vehicles are AC, maintained, and driver-verified."
+          align="left"
+        />
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          {VEHICLES.map((v, i) => (
-            <AnimatedSection key={v.id} delay={i * 0.1}>
-              <div className="group overflow-hidden rounded-2xl border border-white/8 bg-white/5 transition-all duration-500 hover:border-brand-500/30 hover:bg-white/8">
-                <div className="relative h-52 overflow-hidden">
-                  <img
-                    src={fleetImages[v.id]}
-                    alt={v.name}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <p className="font-display text-2xl font-bold text-white">
-                      {v.name}
-                    </p>
-                    <p className="text-sm text-navy-400">{v.models}</p>
+        <div className="space-y-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:space-y-0">
+          {VEHICLES.map((v) => (
+            <div key={v.id} className="app-card overflow-hidden">
+              <img src={fleetImages[v.id]} alt={v.name} className="h-40 w-full object-cover" />
+              <div className="p-4">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <p className="font-bold text-navy-950">{v.name}</p>
+                    <p className="text-xs text-navy-500">{v.models}</p>
                   </div>
+                  <span className="text-sm font-black text-brand-600">
+                    {formatCurrency(v.baseFare)}/km
+                  </span>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-sm text-navy-400">
-                      <span className="flex items-center gap-1.5">
-                        <Users className="h-4 w-4 text-brand-400" />
-                        {v.capacity} seats
-                      </span>
-                      <span className="flex items-center gap-1.5">
-                        <Luggage className="h-4 w-4 text-brand-400" />
-                        AC
-                      </span>
-                    </div>
-                    <p className="font-display text-lg font-bold text-brand-400">
-                      {formatCurrency(v.baseFare)}/km
-                    </p>
-                  </div>
-                  <a
-                    href="#booking"
-                    className="mt-4 block w-full rounded-xl bg-white/10 py-3 text-center text-sm font-semibold text-white transition-all hover:bg-brand-500 hover:text-navy-950"
-                  >
-                    Book {v.name}
-                  </a>
-                </div>
+                <p className="mt-2 flex items-center gap-1 text-xs text-navy-500">
+                  <Users className="h-3.5 w-3.5" />
+                  {v.capacity} seats · AC
+                </p>
+                <Link
+                  to="/book"
+                  className="mt-3 block rounded-xl bg-brand-500 py-2.5 text-center text-sm font-bold text-navy-950"
+                >
+                  Book {v.name}
+                </Link>
               </div>
-            </AnimatedSection>
+            </div>
           ))}
         </div>
       </div>

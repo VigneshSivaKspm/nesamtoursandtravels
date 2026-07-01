@@ -21,20 +21,20 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        'mb-10 max-w-3xl sm:mb-14',
+        'mb-8 max-w-3xl sm:mb-10',
         align === 'center' ? 'mx-auto text-center' : '',
         className,
       )}
     >
       {eyebrow && (
-        <Badge variant={light ? 'dark' : 'brand'} className="mb-3 sm:mb-4">
+        <Badge variant={light ? 'dark' : 'brand'} className="mb-3">
           {eyebrow}
         </Badge>
       )}
       <h2
         className={cn(
-          'font-display text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl xl:text-[2.75rem] xl:leading-[1.15]',
-          light ? 'text-white' : 'text-navy-900',
+          'text-2xl font-bold tracking-tight sm:text-3xl',
+          light ? 'text-white' : 'text-navy-950',
         )}
       >
         {title}
@@ -42,8 +42,8 @@ export function SectionHeading({
       {description && (
         <p
           className={cn(
-            'mt-3 text-base leading-relaxed sm:mt-5 sm:text-lg',
-            light ? 'text-navy-400' : 'text-navy-500',
+            'mt-2 text-sm leading-relaxed sm:mt-3 sm:text-base',
+            light ? 'text-navy-300' : 'text-navy-500',
           )}
         >
           {description}

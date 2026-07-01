@@ -1,31 +1,17 @@
-import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { TopBar } from './TopBar'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { Header } from './Header'
 import { Footer } from './Footer'
-import { MobileActionBar } from './MobileActionBar'
+import { BottomNav } from './BottomNav'
 
 export function Layout() {
-  const location = useLocation()
-
   return (
-    <div className="flex min-h-screen flex-col">
-      <TopBar />
+    <div className="flex min-h-screen flex-col bg-navy-50">
       <Header />
-      <AnimatePresence mode="wait">
-        <motion.main
-          key={location.pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="flex-1 pb-20 lg:pb-0"
-        >
-          <Outlet />
-        </motion.main>
-      </AnimatePresence>
+      <main className="flex-1 pb-20 lg:pb-0">
+        <Outlet />
+      </main>
       <Footer />
-      <MobileActionBar />
+      <BottomNav />
       <ScrollRestoration />
     </div>
   )
